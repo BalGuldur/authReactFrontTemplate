@@ -27,10 +27,14 @@ const styles = theme => ({
 });
 
 class TopPanel extends React.Component {
-  panelTitle = () => this.props.navItems.filter(item => item.link === this.context.router.route.location.pathname)[0].title
+  panelTitle = () => {
+    const { navItems } = this.props;
+    const { pathname } = this.context.router.route.location;
+    const currentItem = navItems.filter(item => item.link === pathname)[0];
+    return currentItem && currentItem.title || '';
+  }
 
   render = () => {
-    console.log(this.context.router);
     const { classes, toggleLeftBar } = this.props;
 
     return (
