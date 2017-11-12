@@ -1,8 +1,9 @@
-import * as types from './types';
+import * as navigation from './navigation';
+import * as filterTable from './filterTable';
 
-export function filterTable(filter) {
-    return {
-        type: types.FILTER,
-        filter
-    };
-}
+const actions = {
+  ...navigation,
+  ...filterTable
+};
+
+export default actions;
