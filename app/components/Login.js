@@ -8,6 +8,7 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import PasswordInput from './base_elements/passwordInput';
+import { push } from 'react-router-redux';
 
 import actions from '../actions';
 
@@ -32,8 +33,15 @@ class Login extends React.Component {
 
   handleChange = name => e => this.setState({[name]: e.target.value})
 
+  handleSignIn = user => () => {
+    this.props.signIn(user).then(
+      () => this.props.successRedirect()
+    );
+  }
+
   render() {
     const { classes } = this.props;
+    const { email, password } = this.state;
 
     return (
       <Grid container justify="center">
@@ -54,7 +62,7 @@ class Login extends React.Component {
               </Grid>
           </CardContent>
           <CardActions>
-            <Button raised onClick={this.props.handleLogin}>Войти</Button>
+            <Button raised onClick={this.handleSignIn({email, password})}>Войти</Button>
           </CardActions>
         </Card>
       </Grid>
@@ -64,12 +72,15 @@ class Login extends React.Component {
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
-  handleLogin: PropTypes.func,
+  signIn: PropTypes.func,
+  history: PropTypes.object,
+  successRedirect: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleLogin: () => dispatch(actions.testSetToken())
+    signIn: (user) => dispatch(actions.signIn(user)),
+    successRedirect: () => dispatch(push('/')),
   };
 };
 

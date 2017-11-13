@@ -9,7 +9,6 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
-
 import actions from '../../actions';
 
 const styles = theme => ({
@@ -81,4 +80,3 @@ export default compose(
   withStyles(styles, {name: 'TopPanel'}),
   connect(mapStateToProps, mapDispatchToProps)
 )(TopPanel);
-// export default withStyles(styles)(TopPanel);

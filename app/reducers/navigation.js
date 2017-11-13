@@ -8,7 +8,6 @@ const initalState = {
     {icon: 'list', title: 'Тест2', link: '/test'}
   ]
 };
-
 const navigation = (state = initalState, action) => {
   switch (action.type) {
     case types.TOGGLE_SIDE_BAR:

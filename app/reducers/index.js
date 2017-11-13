@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import * as types from '../actions/types';
 import navigation from './navigation';
 import auth from './auth';
+import api from './api';
 
 const filter = (state = '', action) => {
   switch (action.type) {
@@ -12,8 +13,8 @@ const filter = (state = '', action) => {
       return state;
   }
 };
-
 const rootReducer = combineReducers({
+  api,
   navigation,
   auth,
   filter,

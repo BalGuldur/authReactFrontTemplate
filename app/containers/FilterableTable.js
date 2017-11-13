@@ -22,12 +22,13 @@ const FilterableTable = ({ filter, onFilter }) => {
 
 FilterableTable.propTypes = {
   filter: PropTypes.string,
-  onFilter: PropTypes.func
+  onFilter: PropTypes.func,
+  api: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
   return {
-    filter: state.filter
+    filter: state.filter,
   };
 };
 

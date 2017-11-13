@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import List, { ListItem, ListItemText } from 'material-ui/List';
-
-
 import actions from '../../actions';
 
 const styles = {
@@ -76,7 +74,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-// export default SideBar;
 export default compose(
   withStyles(styles, {name: 'SideBar'}),
   connect(mapStateToProps, mapDispatchToProps)
