@@ -24,6 +24,12 @@ class RegCompany extends React.Component {
 
   handleChange = name => e => this.setState({[name]: e.target.value})
 
+  handleReg = (user, company) => () => {
+    this.props.regCompany({user, company}).then(
+      () => this.props.signUpRedirect()
+    );
+  }
+
   render = () => {
     const { classes } = this.props;
     const { email, password, companyTitle } = this.state;
@@ -58,7 +64,7 @@ class RegCompany extends React.Component {
             </Grid>
           </CardContent>
           <CardActions>
-            <Button raised onClick={this.props.regCompany.bind(this, {user, company})}>Создать компанию</Button>
+            <Button raised onClick={this.handleReg(user, company)}>Создать компанию</Button>
             <Button raised onClick={this.props.signInRedirect}>Войти</Button>
           </CardActions>
         </Card>
@@ -70,12 +76,14 @@ class RegCompany extends React.Component {
 RegCompany.propTypes = {
   classes: PropTypes.object.isRequired,
   signInRedirect: PropTypes.func,
+  signUpRedirect: PropTypes.func,
   regCompany: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     signInRedirect: () => dispatch(push('/login')),
+    signUpRedirect: () => dispatch(push('/')),
     regCompany: (data) => dispatch(actions.regCompany(data)),
   };
 };

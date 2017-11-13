@@ -33,13 +33,9 @@ class Login extends React.Component {
   handleChange = name => e => this.setState({[name]: e.target.value})
 
   handleSignIn = user => () => {
-    console.log('handleSignIn', user);
     this.props.signIn(user).then(
       () => this.props.successRedirect()
     );
-    // this.props.signIn(user).then(
-    //   () => this.props.successRedirect()
-    // );
   }
 
   render() {
