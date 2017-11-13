@@ -4,11 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
-// import Button from 'material-ui/Button';
-// import List from 'material-ui/List';
 import List, { ListItem, ListItemText } from 'material-ui/List';
-// import Divider from 'material-ui/Divider';
-// import { mailFolderListItems, otherMailFolderListItems } from './tileData';
+
 
 import actions from '../../actions';
 

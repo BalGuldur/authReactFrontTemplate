@@ -7,5 +7,6 @@ export default (
 	<Switch>
 		<Route exact path="/" component={FilterableTable} />
 		<Route path="/about" component={About} />
+		<Route path="/test" component={FilterableTable} />
 	</Switch>
 );

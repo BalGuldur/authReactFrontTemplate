@@ -1,4 +1,6 @@
 import React from 'react';
+import compose from 'recompose/compose';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardContent, CardActions, CardHeader } from 'material-ui/Card';
@@ -6,6 +8,8 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import PasswordInput from './base_elements/passwordInput';
+
+import actions from '../actions';
 
 const styles = theme => ({
   card: {
@@ -50,7 +54,7 @@ class Login extends React.Component {
               </Grid>
           </CardContent>
           <CardActions>
-            <Button raised>Войти</Button>
+            <Button raised onClick={this.props.handleLogin}>Войти</Button>
           </CardActions>
         </Card>
       </Grid>
@@ -59,7 +63,17 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  handleLogin: PropTypes.func,
 };
 
-export default withStyles(styles)(Login);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleLogin: () => dispatch(actions.testSetToken())
+  };
+};
+
+export default compose(
+  withStyles(styles, {name: 'Login'}),
+  connect(null, mapDispatchToProps)
+)(Login);
