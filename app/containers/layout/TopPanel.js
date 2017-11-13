@@ -10,6 +10,7 @@ import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import actions from '../../actions';
+import { push } from 'react-router-redux';
 
 const styles = theme => ({
   root: {
@@ -33,6 +34,11 @@ class TopPanel extends React.Component {
     return currentItem && currentItem.title || '';
   }
 
+  handleLogout = () => () => {
+    this.props.signOut();
+    this.props.redirectAfterLogout();
+  }
+
   render = () => {
     const { classes, toggleLeftBar } = this.props;
 
@@ -46,7 +52,7 @@ class TopPanel extends React.Component {
             <Typography type="title" color="inherit" className={classes.flex}>
               {this.panelTitle()}
             </Typography>
-            <Button color="contrast">Login</Button>
+            <Button color="contrast" onClick={this.handleLogout()}>Logout</Button>
           </Toolbar>
         </AppBar>
       </div>
@@ -58,6 +64,9 @@ TopPanel.propTypes = {
   classes: PropTypes.object.isRequired,
   toggleLeftBar: PropTypes.func,
   navItems: PropTypes.array,
+  currentUser: PropTypes.object,
+  signOut: PropTypes.func,
+  redirectAfterLogout: PropTypes.func,
 };
 
 TopPanel.contextTypes = {
@@ -66,13 +75,16 @@ TopPanel.contextTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    navItems: state.navigation.navItems
+    navItems: state.navigation.navItems,
+    currentUser: state.auth.currentUser,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleLeftBar: () => dispatch(actions.toggleSideBar())
+    toggleLeftBar: () => dispatch(actions.toggleSideBar()),
+    signOut: () => dispatch(actions.signOut()),
+    redirectAfterLogout: () => dispatch(push('/login')),
   };
 };
 
