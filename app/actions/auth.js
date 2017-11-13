@@ -10,11 +10,9 @@ export function setUser(user, token) {
 export function signIn(user) {
   return function n(dispatch, getState) {
     const {api: {axios, rootPath}} = getState();
-    console.log('signInAction', user, axios, rootPath);
     axios.defaults.headers.common = {};
     return axios.post(rootPath + '/users/sign_in.json', {user}).then(
       response => {
-        console.log('sign_in resp', response);
         const respToken = response.headers.authorization.split(' ')[1];
         const respUser = response.data;
         return dispatch(setUser(respUser, respToken));
