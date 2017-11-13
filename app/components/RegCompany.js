@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
+import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Card, { CardContent, CardActions, CardHeader } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import PasswordInput from './base_elements/passwordInput';
+import { push } from 'react-router-redux';
+import actions from '../actions';
 
 const styles = {};
 
@@ -22,6 +26,9 @@ class RegCompany extends React.Component {
 
   render = () => {
     const { classes } = this.props;
+    const { email, password, companyTitle } = this.state;
+    const user = { email, password, password_confirmation: password };
+    const company = { title: companyTitle };
 
     return (
       <Grid container justify="center">
@@ -51,7 +58,8 @@ class RegCompany extends React.Component {
             </Grid>
           </CardContent>
           <CardActions>
-            <Button raised>Создать компанию</Button>
+            <Button raised onClick={this.props.regCompany.bind(this, {user, company})}>Создать компанию</Button>
+            <Button raised onClick={this.props.signInRedirect}>Войти</Button>
           </CardActions>
         </Card>
       </Grid>
@@ -61,6 +69,18 @@ class RegCompany extends React.Component {
 
 RegCompany.propTypes = {
   classes: PropTypes.object.isRequired,
+  signInRedirect: PropTypes.func,
+  regCompany: PropTypes.func,
 };
 
-export default withStyles(styles)(RegCompany);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signInRedirect: () => dispatch(push('/login')),
+    regCompany: (data) => dispatch(actions.regCompany(data)),
+  };
+};
+
+export default compose(
+  withStyles(styles, {name: 'Login'}),
+  connect(null, mapDispatchToProps)
+)(RegCompany);

@@ -9,7 +9,6 @@ import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import PasswordInput from './base_elements/passwordInput';
 import { push } from 'react-router-redux';
-
 import actions from '../actions';
 
 const styles = theme => ({
@@ -34,9 +33,13 @@ class Login extends React.Component {
   handleChange = name => e => this.setState({[name]: e.target.value})
 
   handleSignIn = user => () => {
+    console.log('handleSignIn', user);
     this.props.signIn(user).then(
       () => this.props.successRedirect()
     );
+    // this.props.signIn(user).then(
+    //   () => this.props.successRedirect()
+    // );
   }
 
   render() {
@@ -63,6 +66,7 @@ class Login extends React.Component {
           </CardContent>
           <CardActions>
             <Button raised onClick={this.handleSignIn({email, password})}>Войти</Button>
+            <Button raised onClick={this.props.regRedirect}>Регистрация</Button>
           </CardActions>
         </Card>
       </Grid>
@@ -75,12 +79,14 @@ Login.propTypes = {
   signIn: PropTypes.func,
   history: PropTypes.object,
   successRedirect: PropTypes.func,
+  regRedirect: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     signIn: (user) => dispatch(actions.signIn(user)),
     successRedirect: () => dispatch(push('/')),
+    regRedirect: () => dispatch(push('/regCompany')),
   };
 };
 

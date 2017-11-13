@@ -9,10 +9,8 @@ const initialState = {
 };
 const auth = (state = initialState, action) => {
   switch (action.type) {
-    case types.SET_USER_TOKEN:
-      return {...state, userToken: action.userToken};
-    case types.SET_CURRENT_USER:
-      return {...state, currentUser: action.user};
+    case types.SET_USER:
+      return {...state, userToken: action.token, currentUser: action.user};
     default:
       return state;
   }
