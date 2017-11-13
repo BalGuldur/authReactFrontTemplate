@@ -7,6 +7,13 @@ export function setUser(user, token) {
     user: user,
   };
 }
+export function setLSToken(token) {
+  return function n(dispatch, getState) {
+    const {auth: {lsPrefix}} = getState();
+    localStorage.setItem(lsPrefix + 'userToken', token);
+    return Promise.resolve();
+  };
+}
 export function signIn(user) {
   return function n(dispatch, getState) {
     const {api: {axios, rootPath}} = getState();
@@ -15,7 +22,10 @@ export function signIn(user) {
       response => {
         const respToken = response.headers.authorization.split(' ')[1];
         const respUser = response.data;
-        return dispatch(setUser(respUser, respToken));
+        return Promise.all([
+          dispatch(setUser(respUser, respToken)),
+          dispatch(setLSToken(respToken))
+        ]);
       }
     );
   };
@@ -29,6 +39,7 @@ export function signOut() {
     };
     return Promise.all([
       dispatch(setUser(undefined, undefined)),
+      dispatch(setLSToken(undefined)),
       axios.delete(rootPath + '/users/sign_out.json')
     ]);
   };
