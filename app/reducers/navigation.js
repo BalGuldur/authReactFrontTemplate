@@ -4,8 +4,7 @@ const initalState = {
   leftNavIsOpen: false,
   topNavTitle: '',
   navItems: [
-    {icon: 'list', title: 'Тест', link: '/test'},
-    {icon: 'list', title: 'Тест2', link: '/test'},
+    {icon: 'list', title: 'Home', link: '/'},
     {icon: 'list', title: 'Пользователи', link: '/users'}
   ]
 };
