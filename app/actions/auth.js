@@ -2,7 +2,7 @@ import * as types from './types';
 
 export function setUser(user, token) {
   return {
-    type: types.SET_USER,
+    type: types.SET_CURRENT_USER,
     token: token,
     user: user,
   };

@@ -26,7 +26,6 @@ class App extends React.Component {
       <div>
         <TopPanel/>
         <SideBar/>
-        <h1>Filter table</h1>
         { Routes }
         <footer className={footer} />
       </div>

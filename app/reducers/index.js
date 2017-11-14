@@ -4,6 +4,7 @@ import * as types from '../actions/types';
 import navigation from './navigation';
 import auth from './auth';
 import api from './api';
+import users from './users';
 
 const filter = (state = '', action) => {
   switch (action.type) {
@@ -14,6 +15,7 @@ const filter = (state = '', action) => {
   }
 };
 const rootReducer = combineReducers({
+  users,
   api,
   navigation,
   auth,

@@ -5,7 +5,8 @@ const initalState = {
   topNavTitle: '',
   navItems: [
     {icon: 'list', title: 'Тест', link: '/test'},
-    {icon: 'list', title: 'Тест2', link: '/test'}
+    {icon: 'list', title: 'Тест2', link: '/test'},
+    {icon: 'list', title: 'Пользователи', link: '/users'}
   ]
 };
 const navigation = (state = initalState, action) => {
